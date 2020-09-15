@@ -1,0 +1,99 @@
+<div class="container-fluid">
+
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="/">Cadastro</a>
+    </li>
+    <li class="breadcrumb-item active">Produtos</li>
+  </ol>
+
+  <!-- Page Content -->
+  <form method="POST" action="/product">
+          <div class="form-group">
+            <div class="form-label-group">
+              <input name="name" type="text" id="inputName" class="form-control" placeholder="Nome do Produto"
+                required="required" autofocus="autofocus">
+              <label for="inputName">Nome do produto</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="form-label-group">
+              <select name="category" id="selectCategory" class="form-control" placeholder="Categoria do Produto"
+                required="required">
+                {{#each categorias}}
+              <option value={{this.id}}>
+                {{this.name}}
+              </option>
+            {{/each}}
+                </select>
+            </div>
+          </div>
+          <button class="btn btn-primary btn-block" type="submit">Cadastrar produto</button>
+  </form>
+  
+  <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Deletar</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Deletar</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            {{#each produtos}}
+              <tr>
+                <td>{{this.id}}</td>
+                <td>{{this.product_name}}</td>
+                <td>{{this.category_name}}</td>
+                <td><button type="button" class="btn btn-primary btn-block" onclick="excluirProduto({{this.id}})">Excluir</button></td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+<script>
+  function excluirProduto(idProduto) {
+    $.ajax(
+      {
+        type: "DELETE",
+        data: `id=${idProduto}`,
+        url: "/product",
+        success: (msg) => {
+          window.alert("Produto excluido com sucesso!")
+          window.location.href = window.location.href;
+        }
+      }
+    )
+  }
+
+  function atualizaProduto(id, name) {
+    $.ajax(
+      {
+        type: "UPDATE",
+        data: `id=${id}&name=${name}`,
+        url: "/product",
+        success: (msg) => {
+          window.alert("Produto atualizado com sucesso!")
+          window.location.href = window.location.href;
+        }
+      }
+    )
+  }
+</script>

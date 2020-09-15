@@ -1,0 +1,63 @@
+<!-- Inser Transaction Modal-->
+<div class="modal fade" id="insertTransactionModal" tabindex="-1" role="dialog" aria-labelledby="insertTransactionModal"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="insertTransactionModal">Inserir transação</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                <form id="transactionForm" method="POST" action="#">
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <select name="ativo" id="ativo" class="form-control" required="required"
+                                    autofocus="autofocus">
+                                    {{!-- Listar aqui os ativos possíveis --}}
+                                    <option selected disabled>Selecione um ativo</option>
+                                    <option>Ativo 1</option>
+                                    <option>Ativo 2</option>
+                                    <option>Ativo 3</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input id="quantidade" type="text" name="quantidade" class="form-control"
+                                        required="required" autofocus="autofocus" placeholder="Quantidade"/>
+                                    <label for="quantidade">Quantidade</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-row">
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input id="preco" type="text" name="preco" class="form-control" required="required"
+                                        autofocus="autofocus" placeholder="Preço"/>
+                                    <label for="preco">Preço</label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-label-group">
+                                    <input id="date" type="date" name="date" class="form-control" required="required"
+                                        autofocus="autofocus" />
+                                    <label for="date">Data da Transação</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                <button type="submit" form="transactionForm" class="btn btn-primary">Cadastrar</button>
+                {{!-- <a class="btn btn-primary" href="/doLogout">Logout</a> --}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,91 @@
+<div class="container-fluid">
+
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="/">Cadastro</a>
+    </li>
+    <li class="breadcrumb-item active">Categorias</li>
+  </ol>
+
+  <!-- Page Content -->
+  <form method="POST" action="/category">
+          <div class="form-group">
+            <div class="form-label-group">
+              <input name="name" type="text" id="inputName" class="form-control" placeholder="Nome da Categoria"
+                required="required" autofocus="autofocus">
+              <label for="inputName">Nome da categoria</label>
+            </div>
+          </div>
+
+          <button class="btn btn-primary btn-block" type="submit">Cadastrar categoria</button>
+  </form>
+  
+  <div class="card-body">
+      <div class="table-responsive">
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Deletar</th>
+              <th>Editar</th>
+            </tr>
+          </thead>
+          <tfoot>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Deletar</th>
+              <th>Editar</th>
+            </tr>
+          </tfoot>
+          <tbody>
+            {{#each categorias}}
+              <tr>
+                <td>{{this.id}} <input name="id"  type="hidden" value="{{this.id}}"></td>
+                <td>{{this.name}} <input name="name" id="nomeCatagoria" type="hidden" value="{{this.name}}"></td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-block" onclick="excluirCategoria({{this.id}})">Excluir</button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-primary btn-block" id="btnEditar"  onclick="editando(true)">Editar</button>
+                  <button type="button" class="btn btn-primary btn-block" id="btnConfirmar" type="hidden" onclick="editando(false)">Confirmar</button>
+                </td>
+              </tr>
+            {{/each}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+</div>
+<!-- /.container-fluid -->
+
+<script>
+  function editando(state) {
+    $('#nomeCategoria').attr("disabled", state);
+    if(!state) {
+      $('#btnConfirmar').hide()
+      $('#btnEditar').show()
+    } else{
+      $('#btnConfirmar').show()
+      $('#btnEditar').hide()
+      $('#nomeCatagoria').show()
+    }
+    //state tem que vir como true ou false categoria.disabled = !categoria.disabled;
+  }
+  function excluirCategoria(idCategoria) {
+    $.ajax(
+      {
+        type: "DELETE",
+        data: `id=${idCategoria}`,
+        url: "/category",
+        success: (msg) => {
+          window.alert("Categoria excluida com sucesso!")
+          window.location.href = window.location.href;
+        }
+      }
+    )
+  }
+</script>

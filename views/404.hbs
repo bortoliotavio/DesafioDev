@@ -1,0 +1,35 @@
+<div class="container-fluid">
+
+  <!-- Breadcrumbs-->
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="/">Erro</a>
+    </li>
+    <li class="breadcrumb-item active">
+
+      {{#if error.status}}
+        {{error.status}}
+      {{else}}
+        404 Error
+      {{/if}}
+
+    </li>
+  </ol>
+
+  <!-- Page Content -->
+  <h1 class="display-1">
+    {{#if error.status}}
+      {{error.status}}
+    {{else}}
+      404 Error
+    {{/if}}
+  </h1>
+  <p class="lead">
+    {{#if error.status}}
+      {{error.status}}
+    {{else}}
+      Not Found. You can <a href="javascript:history.back()">go back</a> to the previous page, or
+    <a href="/">return home</a>.</p>
+    {{/if}}
+</div>
+<!-- /.container-fluid -->
